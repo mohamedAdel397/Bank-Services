@@ -1,0 +1,161 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+header {
+  background-color: #003366;
+  color: white;
+  padding: 20px 0;
+}
+
+.logo {
+  float: left;
+}
+
+nav ul {
+  list-style: none;
+  float: right;
+}
+
+nav ul li {
+  display: inline;
+  margin-left: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.hero {
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.hero img {
+  max-width: 100%;
+}
+
+.hero-text {
+  margin-top: -150px;
+  background: rgba(255, 255, 255, 0.8);
+  display: inline-block;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hero-text h1 {
+  margin: 0;
+}
+
+.hero-text p {
+  margin: 10px 0 20px;
+}
+
+.hero-text .cta {
+  background: #003366;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 0 10px;
+}
+
+.quick-access {
+  background: #e0e0e0;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.quick-access a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #003366;
+}
+
+.promotional-banners {
+  background: #f4f4f4;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.promotional-banners .banner {
+  background: white;
+  display: inline-block;
+  width: 45%;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.promotional-banners .cta {
+  background: #003366;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.main-content {
+  padding: 20px 0;
+}
+
+.main-content .content-section {
+  margin-bottom: 20px;
+}
+
+.main-content h2 {
+  color: #003366;
+}
+
+.testimonials, .news-updates, .security-info {
+  background: #f4f4f4;
+  padding: 20px 0;
+}
+
+footer {
+  background: #003366;
+  color: white;
+  padding: 20px 0;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer .social-media a {
+  margin: 0 10px;
+}
+
+.footer .newsletter-signup form {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.footer .newsletter-signup input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.footer .newsletter-signup button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #003366;
+  cursor: pointer;
+}

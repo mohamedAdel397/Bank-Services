@@ -1,0 +1,27 @@
+.customer-navbar{
+  background-color: darkblue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+
+  navbar-title{
+    >a {
+      color:white;
+      margin-left: 10px;
+      font-size: 18px;
+      font-weight: bolder;
+    }
+  }
+  .nav-links{
+    display: flex;
+    align-items: center;
+    a{
+      color:white;
+      margin-left: 15px;
+    }
+  }
+  .welcome-message {
+    color: black;
+  }
+}
