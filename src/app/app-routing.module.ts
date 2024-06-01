@@ -12,6 +12,7 @@ import {ProductListComponent} from "./auth/components/product-list/product-list.
 import {CartComponent} from "./auth/components/cart/cart.component";
 import {ConfirmationComponent} from "./auth/components/confirmation/confirmation.component";
 import {BankCreditComponent} from "./auth/components/bank-credit/bank-credit.component";
+import {HyperSwitchPaymentComponent} from "./auth/components/hyper-switch-payment/hyper-switch-payment.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
   { path: 'activate-account', component: ActivitionPageComponent },
   { path: 'homepage', component: HomepageComponent, canActivate: [AuthGuard] },
+  { path: 'hyperswitch-payment', component: HyperSwitchPaymentComponent },
   { path: '', component: WelcomePageComponent },
   {path: 'product', component: ProductListComponent, canActivate: [AuthGuard]},
   {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},

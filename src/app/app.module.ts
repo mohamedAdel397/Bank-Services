@@ -16,6 +16,7 @@ import { ActivitionPageComponent } from './auth/components/activition-page/activ
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { HomepageComponent } from './auth/components/homepage/homepage.component';
 import { WelcomePageComponent } from './auth/components/welcome-page/welcome-page.component';
+import { HyperSwitchPaymentComponent } from './auth/components/hyper-switch-payment/hyper-switch-payment.component';
 import { ProductListComponent } from './auth/components/product-list/product-list.component';
 import { CartComponent } from './auth/components/cart/cart.component';
 import { ConfirmationComponent } from './auth/components/confirmation/confirmation.component';
@@ -28,6 +29,7 @@ import { BankCreditComponent } from './auth/components/bank-credit/bank-credit.c
     ActivitionPageComponent,
     HomepageComponent,
     WelcomePageComponent,
+    HyperSwitchPaymentComponent,
     ProductListComponent,
     CartComponent,
     ConfirmationComponent,
