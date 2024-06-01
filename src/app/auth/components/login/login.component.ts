@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
   authenticationRequest: AuthenticationRequest | undefined;
   onSubmit() {
-    debugger
     this.authenticationRequest = this.loginForm.value as AuthenticationRequest;
     console.log(this.authenticationRequest)
     // console.log(this.userForm.value)

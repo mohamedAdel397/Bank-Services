@@ -1,0 +1,66 @@
+<div class="product">
+  <div class="mb-3">
+    <label for="prdCat" class="form-label">Category:</label>
+    <select #cat class="form-select" name="cat" id="prdCat" (change)="getSelCat(cat.value)">
+      <option value="" disabled selected>Select a category</option>
+      <option *ngFor="let cat of catlist" [value]="cat.id">{{cat.Name}}</option>
+    </select>
+  </div>
+
+  <div class="btn-container">
+    <!-- <button type="button" class="btn btn-primary btn-small" (click)="changeCat()">Change Category</button>-->
+  </div>
+  <p class="date">Today's Date: {{orderDate | date: 'longDate'}}</p>
+  <hr>
+  <div class="table-responsive">
+    <table class="table custom-table">
+      <thead>
+      <tr>
+        <th scope="col" class="text-center">No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col" class="text-center">Quantity</th>
+        <th scope="col">Image</th>
+        <th scope="col" class="text-center">Category ID</th>
+        <th scope="col" class="text-center">Count</th>
+        <th scope="col">Buy</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let prd of prdList; let i = index" [class.d-none]="selectedCatID != prd.categoryId" [style.backgroundColor]="prd.quantity == 0 ? 'yellow' : 'lightgray'">
+        <td class="text-center">{{i + 1}}</td>
+        <td class="text-center">{{prd.Name}}</td>
+        <td class="text-center">{{prd.price | currency: 'EUR' : 'symbol'}}</td>
+        <td class="text-center">
+          <div [ngSwitch]="prd.quantity">
+            <div *ngSwitchCase="0">Out Of Stock</div>
+            <div *ngSwitchCase="1">Last Item!</div>
+            <div *ngSwitchCase="2">Last 2 Items</div>
+            <div *ngSwitchDefault>{{prd.quantity}}</div>
+          </div>
+        </td>
+        <td class="text-center"><img appLightBox highLightColor="red" [src]="prd.imgUrl" alt=""></td>
+        <td class="text-center">{{prd.categoryId}}</td>
+        <td class="text-center">
+          <div class="count-input-container">
+            <input #itemsCount type="number" class="form-control small-input" min="1" (change)="checkMinValue(itemsCount)">
+          </div>
+        </td>
+        <td class="text-center">
+          <div class="add-to-cart-container">
+            <button class="btn btn-primary"
+                    [disabled]="!itemsCount.value || prd.quantity === 0"
+                    (click)="addToCart(prd, itemsCount.value)">
+              Add To Cart
+            </button>
+            <div *ngIf="showAddToCartMessage[i]" class="add-to-cart-message">
+              Item added to cart!
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<!--  <h3 class="order-total"></h3>-->
+</div>

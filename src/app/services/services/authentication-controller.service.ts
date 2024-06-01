@@ -81,6 +81,15 @@ export class AuthenticationControllerService extends BaseService {
     );
   }
 
+  payment(params: Register$Params, context?: HttpContext): Observable<{
+  }> {
+    return this.register$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+      }>): {
+      } => r.body)
+    );
+  }
+
   /** Path part for operation `authenticate()` */
   static readonly AuthenticatePath = '/api/v1/auth/authenticate';
 

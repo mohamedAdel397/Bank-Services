@@ -1,0 +1,29 @@
+.cart{
+  padding: 10px;
+}
+.table th, .table td {
+  padding: 15px; /* Adjust padding for spacing */
+}
+
+.table .col-name {
+  width: 25%; /* Adjust width as needed */
+}
+
+.table .col-price {
+  width: 10%; /* Adjust width as needed */
+}
+
+.table .col-quantity {
+  width: 25%; /* Adjust width as needed */
+}
+
+.table .col-total {
+  width: 20%; /* Adjust width as needed */
+}
+
+.table .col-actions {
+  width: 25%; /* Adjust width as needed */
+}
+.col-quantity{
+  text-align: center;
+}

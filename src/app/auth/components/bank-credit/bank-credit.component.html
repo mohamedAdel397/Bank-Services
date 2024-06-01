@@ -1,0 +1,75 @@
+<div class="bank-credit">
+  <h2>Select Payment Method</h2>
+  <form #creditForm="ngForm" (ngSubmit)="completeCheckout(creditForm)">
+    <div class="mb-3">
+      <label class="form-label">Payment Method</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="paypal" name="paymentMethod" value="PayPal" [(ngModel)]="selectedPaymentMethod" required>
+        <label class="form-check-label" for="paypal">
+          <i class="fab fa-paypal"></i> PayPal
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="visa" name="paymentMethod" value="Visa" [(ngModel)]="selectedPaymentMethod" required>
+        <label class="form-check-label" for="visa">
+          <i class="fab fa-cc-visa"></i> Visa
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="mastercard" name="paymentMethod" value="MasterCard" [(ngModel)]="selectedPaymentMethod" required>
+        <label class="form-check-label" for="mastercard">
+          <i class="fab fa-cc-mastercard"></i> MasterCard
+        </label>
+      </div>
+    </div>
+
+    <div *ngIf="selectedPaymentMethod === 'PayPal'" class="mb-3">
+      <label for="paypalEmail" class="form-label">PayPal Email</label>
+      <input type="email" class="form-control" id="paypalEmail" name="paypalEmail" [(ngModel)]="paypalEmail" required>
+    </div>
+
+    <div *ngIf="selectedPaymentMethod === 'Visa' || selectedPaymentMethod === 'MasterCard'" class="mb-3">
+      <label for="cardNumber" class="form-label">Card Number</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="cardIcon">
+            <i class="fas fa-credit-card"></i>
+          </span>
+        </div>
+        <input type="text" class="form-control" id="cardNumber" name="cardNumber" [(ngModel)]="paymentRequest.cardNumber" required>
+      </div>
+    </div>
+    <div *ngIf="selectedPaymentMethod === 'Visa' || selectedPaymentMethod === 'MasterCard'" class="mb-3">
+      <label for="cardHolderName" class="form-label">card Holder Name</label>
+      <input type="text" class="form-control" id="cardHolderName" name="cardHolderName" [(ngModel)]="paymentRequest.cardHolderName" required>
+    </div>
+    <div *ngIf="selectedPaymentMethod === 'Visa' || selectedPaymentMethod === 'MasterCard'" class="mb-3">
+      <label for="expiryDate" class="form-label">Expiry Date</label>
+      <input type="text" class="form-control" id="expiryDate" name="expiryDate" [(ngModel)]="paymentRequest.expirationDate" required>
+    </div>
+    <div *ngIf="selectedPaymentMethod === 'Visa' || selectedPaymentMethod === 'MasterCard'" class="mb-3">
+      <label for="cvv" class="form-label">CVV</label>
+      <input type="text" class="form-control" id="cvv" name="cvv" [(ngModel)]="paymentRequest.cvv" required>
+    </div>
+    <div *ngIf="selectedPaymentMethod === 'Visa' || selectedPaymentMethod === 'MasterCard'" class="mb-3">
+      <label for="amount" class="form-label">amount</label>
+      <input type="text" class="form-control" disabled id="amount" name="amount" [(ngModel)]="paymentRequest.amount" required>
+    </div>
+    <div *ngIf="selectedPaymentMethod === 'Visa' || selectedPaymentMethod === 'MasterCard'" class="mb-3">
+      <label for="currency" class="form-label">Currency</label>
+      <select class="form-select" id="currency" name="currency" [(ngModel)]="paymentRequest.currency" required>
+        <option value="EGP">EGP</option> <!-- Default option -->
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <!-- Add more currency options as needed -->
+      </select>
+    </div>
+
+    <div *ngIf="selectedPaymentMethod === 'Visa' || selectedPaymentMethod === 'MasterCard'" class="mb-3">
+      <label for="billingAddress" class="form-label">billingAddress</label>
+      <input type="text" class="form-control" id="billingAddress" name="billingAddress" [(ngModel)]="paymentRequest.billingAddress" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!creditForm.valid">Complete Purchase</button>
+  </form>
+</div>

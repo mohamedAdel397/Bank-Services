@@ -1,0 +1,27 @@
+<div class="cart">
+  <h2>Cart Items</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col" class="col-name">Name</th>
+      <th scope="col" class="col-price">Price</th>
+      <th scope="col" class="col-quantity">Quantity</th>
+      <th scope="col" class="col-total">Total</th>
+      <th scope="col" class="col-actions">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of cartItems; let i = index">
+      <td class="col-name">{{ item.product.Name }}</td>
+      <td class="col-price">{{ item.product.price | currency: 'EUR' : 'symbol' }}</td>
+      <td class="col-quantity">{{ item.count }}</td>
+      <td class="col-total">{{ item.product.price * item.count | currency: 'EUR' : 'symbol' }}</td>
+      <td class="col-actions">
+        <button class="btn btn-danger" (click)="removeFromCart(i)">Remove</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <h3>Total Amount: {{ totalAmount | currency: 'EUR' : 'symbol' }}</h3>
+  <button class="btn btn-success" (click)="checkout()" [disabled]="cartItems.length === 0">Checkout</button>
+</div>

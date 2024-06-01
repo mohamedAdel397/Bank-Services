@@ -16,6 +16,10 @@ import { ActivitionPageComponent } from './auth/components/activition-page/activ
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { HomepageComponent } from './auth/components/homepage/homepage.component';
 import { WelcomePageComponent } from './auth/components/welcome-page/welcome-page.component';
+import { ProductListComponent } from './auth/components/product-list/product-list.component';
+import { CartComponent } from './auth/components/cart/cart.component';
+import { ConfirmationComponent } from './auth/components/confirmation/confirmation.component';
+import { BankCreditComponent } from './auth/components/bank-credit/bank-credit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +27,11 @@ import { WelcomePageComponent } from './auth/components/welcome-page/welcome-pag
     SignupComponent,
     ActivitionPageComponent,
     HomepageComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    ProductListComponent,
+    CartComponent,
+    ConfirmationComponent,
+    BankCreditComponent
   ],
   imports: [
     BrowserModule,
