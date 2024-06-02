@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-hyper-switch-payment',
@@ -7,29 +8,30 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HyperSwitchPaymentComponent implements OnInit {
 
-  YOUR_PUBLISHABLE_KEY = 'pk_snd_8a63a89e0fbe47259d09437176203af0';
+  YOUR_PUBLISHABLE_KEY = 'pk_snd_7bcd513cbfb54f88b3b40696660f61eb';
+  elements: any;
   hyper: any;
-  widgets: any;
-  client: any;
+  clientSecret: string | undefined;
 
   ngOnInit(): void {
     // Initialize HyperSwitch when the component is initialized
     this.loadHyperSwitch();
   }
 
+  constructor(private toastr: ToastrService) {}
+
   async loadHyperSwitch() {
-    debugger
     const response = await fetch('hyper-switch-payment/create', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({items: [{id: 'xl-tshirt'}], country: 'US'}),
     });
     const {clientSecret} = await response.json();
-    this.client = clientSecret;
+    this.clientSecret = clientSecret;
 
     // Initialize HyperSwitch
     this.hyper = (window as any).Hyper(this.YOUR_PUBLISHABLE_KEY);
-    this.widgets = this.hyper.widgets({clientSecret});
+    this.elements = this.hyper.elements({clientSecret});
 
     // Create payment checkout
     const unifiedCheckoutOptions = {
@@ -37,36 +39,36 @@ export class HyperSwitchPaymentComponent implements OnInit {
         walletReturnUrl: 'https://example.com/complete',
       },
     };
-    const unifiedCheckout = this.widgets.create('payment', unifiedCheckoutOptions);
+    const unifiedCheckout = this.elements.create('payment', unifiedCheckoutOptions);
     unifiedCheckout.mount('#unified-checkout');
-
-    // await this.checkStatus();
-
-    // Call handleSubmit and checkStatus
-
   }
 
   async handleSubmit(event: Event) {
+    debugger
     event.preventDefault();
     this.setLoading(true);
     await this.checkStatus();
 
     const {error} = await this.hyper.confirmPayment({
-      widgets: this.widgets,
+      elements: this.elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
         return_url: "http://localhost:4200/complete",
       },
+      redirect: "always"
     });
 
-    // This point will only be reached if there is an immediate error occurring while confirming the payment. Otherwise, your customer will be redirected to your "return_url".
+    // This point will only be reached if there is an immediate error occurring while confirming the payment.
+    // Otherwise, your customer will be redirected to your "return_url".
 
-    // For some payment flows such as Sofort, iDEAL, your customer will be redirected to an intermediate page to complete authorization of the payment, and then redirected to the "return_url".
+    // For some payment flows such as Sofort, iDEAL,
+    // your customer will be redirected to an intermediate page to complete authorization of the payment,
+    // and then redirected to the "return_url".
 
     if (error?.type === "validation_error") {
-      this.showMessage(error.message);
+      this.toastr.error(error.message, "Validation Error");
     } else {
-      this.showMessage("An unexpected error occurred.");
+      this.toastr.error("An unexpected error occurred.", "Error");
     }
     this.setLoading(false);
   }
@@ -74,25 +76,26 @@ export class HyperSwitchPaymentComponent implements OnInit {
 
   async checkStatus() {
     debugger
-    if (!this.client) {
+    if (!this.clientSecret) {
       console.log("error status")
       return;
     }
-    console.log(this.client)
-    const {payment} = await this.hyper.retrievePayment(this.client);
+    const payment = await this.hyper.retrievePaymentIntent(this.clientSecret);
+    console.log("Client sercret" + this.clientSecret);
+    console.log(payment.paymentIntent.status);
 
-    switch (payment.status) {
+    switch (payment.paymentIntent.status) {
       case "succeeded":
-        this.showMessage("Payment succeeded!");
+        this.toastr.success("Payment succeeded!", "Success");
         break;
       case "processing":
-        this.showMessage("Your payment is processing.");
+        this.toastr.info("Your payment is processing.", "Processing");
         break;
       case "requires_payment_method":
-        this.showMessage("Your payment was not successful, please try again.");
+        this.toastr.warning("Your payment was not successful, please try again.", "Payment Failed");
         break;
       default:
-        this.showMessage("Something went wrong.");
+        this.toastr.error("Something went wrong.", "Error");
         break;
     }
   }

@@ -21,6 +21,8 @@ import { ProductListComponent } from './auth/components/product-list/product-lis
 import { CartComponent } from './auth/components/cart/cart.component';
 import { ConfirmationComponent } from './auth/components/confirmation/confirmation.component';
 import { BankCreditComponent } from './auth/components/bank-credit/bank-credit.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,9 @@ import { BankCreditComponent } from './auth/components/bank-credit/bank-credit.c
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
 
   ],
   providers: [HttpClient],

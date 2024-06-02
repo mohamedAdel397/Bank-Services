@@ -29,6 +29,6 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    this.router.navigate(['/bank-credit']);
+    this.router.navigate(['/hyperswitch-payment']);
   }
 }
