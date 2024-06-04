@@ -28,4 +28,8 @@ export class HyperSwitchPaymentComponent implements OnInit {
     this.renderer.appendChild(document.body, script);
   }
 
+
+  handleSubmit($event: SubmitEvent) { this.paymentService.handleSubmit($event);
+
+  }
 }
