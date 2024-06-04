@@ -27,6 +27,7 @@ export class PaymentService {
 
       const response = await this.http.post<{ clientSecret: string }>(`${this.API_URL}/hyperswitch-payment/create`, body, { headers }).toPromise();
       console.log("HI")
+      console.log("Mohamed Adel")
       if (!response || !response.clientSecret) {
         throw new Error('Invalid response from the server');
       }
