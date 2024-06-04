@@ -26,7 +26,7 @@ export class PaymentService {
       const body = { items: [{ id: 'xl-tshirt' }], country: 'US' };
 
       const response = await this.http.post<{ clientSecret: string }>(`${this.API_URL}/hyperswitch-payment/create`, body, { headers }).toPromise();
-
+      console.log("HI")
       if (!response || !response.clientSecret) {
         throw new Error('Invalid response from the server');
       }
