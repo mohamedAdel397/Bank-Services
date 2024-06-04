@@ -56,4 +56,6 @@ import {ToastrModule} from "ngx-toastr";
   providers: [HttpClient],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { }{
+
+}
