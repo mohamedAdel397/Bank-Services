@@ -75,14 +75,11 @@ export class HyperSwitchPaymentComponent implements OnInit {
 
 
   async checkStatus() {
-    debugger
     if (!this.clientSecret) {
       console.log("error status")
       return;
     }
     const payment = await this.hyper.retrievePaymentIntent(this.clientSecret);
-    console.log("Client sercret" + this.clientSecret);
-    console.log(payment.paymentIntent.status);
 
     switch (payment.paymentIntent.status) {
       case "succeeded":

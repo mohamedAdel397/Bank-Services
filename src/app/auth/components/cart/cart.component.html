@@ -23,5 +23,16 @@
     </tbody>
   </table>
   <h3>Total Amount: {{ totalAmount | currency: 'EUR' : 'symbol' }}</h3>
-  <button class="btn btn-success" (click)="checkout()" [disabled]="cartItems.length === 0">Checkout</button>
+  <div class="button-group">
+    <button class="btn btn-success" (click)="checkout()" [disabled]="cartItems.length === 0">Checkout</button>
+    <button class="btn btn-success" (click)="hyperSwitchCheckout()" [disabled]="cartItems.length === 0">Hyperswitch
+      Checkout
+    </button>
+    <button class="btn btn-success" (click)="fawryCheckout()" [disabled]="cartItems.length === 0">Fawry Checkout
+    </button>
+    <button class="btn btn-success" (click)="paymobCheckout()" [disabled]="cartItems.length === 0">Paymob Redirect Checkout
+    </button>
+    <button class="btn btn-success" (click)="paymobIframeCheckout()" [disabled]="cartItems.length === 0">Paymob Iframe Redirect Checkout
+    </button>
+  </div>
 </div>

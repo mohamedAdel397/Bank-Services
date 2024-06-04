@@ -1,6 +1,7 @@
-.cart{
+.cart {
   padding: 10px;
 }
+
 .table th, .table td {
   padding: 15px; /* Adjust padding for spacing */
 }
@@ -24,6 +25,13 @@
 .table .col-actions {
   width: 25%; /* Adjust width as needed */
 }
-.col-quantity{
+
+.col-quantity {
   text-align: center;
+}
+
+.button-group {
+  display: flex;
+  //flex-direction: column;
+  gap: 10px; /* Adjust the space between buttons */
 }

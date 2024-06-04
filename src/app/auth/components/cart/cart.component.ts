@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { IProduct } from "../product-list/IProduct";
-import { CartService } from "./cartService";
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {IProduct} from "../product-list/IProduct";
+import {CartService} from "./cartService";
+import {PaymentService} from "../bank-credit/PaymentService";
+import {PaymobService} from "../../../services/services/paymob.service";
+import {PaymobIframeService} from "../../../services/services/paymob-iframe.service";
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +15,11 @@ export class CartComponent implements OnInit {
   cartItems: { product: IProduct, count: number }[] = [];
   totalAmount: number = 0;
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(private cartService: CartService,
+              private paymobService: PaymobService,
+              private paymobIframeService: PaymobIframeService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.loadCart();
@@ -29,6 +36,29 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+    this.router.navigate(['/bank-credit']);
+  }
+
+  hyperSwitchCheckout() {
     this.router.navigate(['/hyperswitch-payment']);
+  }
+
+  fawryCheckout() {
+    this.router.navigate(['/fawry-payment']);
+  }
+
+  paymobCheckout() {
+    this.paymobService.createPayment().subscribe({
+      next: response => {
+        const clientSecret = response.client_secret;
+        const url = this.paymobService.getUnifiedCheckoutUrl(clientSecret);
+        window.location.href = url;
+      },
+      error: err => console.error(err)
+    });
+  }
+
+  paymobIframeCheckout() {
+    this.paymobIframeService.firstStep();
   }
 }
