@@ -13,6 +13,7 @@ import {CartComponent} from "./auth/components/cart/cart.component";
 import {ConfirmationComponent} from "./auth/components/confirmation/confirmation.component";
 import {BankCreditComponent} from "./auth/components/bank-credit/bank-credit.component";
 import {HyperSwitchPaymentComponent} from "./auth/components/hyper-switch-payment/hyper-switch-payment.component";
+import {StripePaymentComponent} from "./auth/components/stripe-payment/stripe-payment.component";
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'product', component: ProductListComponent, canActivate: [AuthGuard]},
   {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
   { path: 'bank-credit', component: BankCreditComponent,canActivate: [AuthGuard] },
-  { path: 'confirmation', component: ConfirmationComponent,canActivate: [AuthGuard] }
+  { path: 'confirmation', component: ConfirmationComponent,canActivate: [AuthGuard] },
+  { path: 'stripe', component: StripePaymentComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
