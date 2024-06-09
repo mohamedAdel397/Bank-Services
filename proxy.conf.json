@@ -2,5 +2,10 @@
   "/hyper-switch-payment/**": {
     "target": "http://localhost:8080",
     "secure": false
+  },
+  "/stripe-payment/**": {
+    "target": "http://localhost:8080",
+    "secure": false
   }
 }
+

@@ -29,6 +29,7 @@
     "jwt-decode": "^2.2.0",
     "ng-openapi-gen": "^0.51.0",
     "ng-zorro-antd": "^14.0.0",
+    "@stripe/stripe-js": "^3.5.0",
     "ngx-toastr": "^15.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

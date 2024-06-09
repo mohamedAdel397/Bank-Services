@@ -30,9 +30,15 @@
     </button>
     <button class="btn btn-success" (click)="fawryCheckout()" [disabled]="cartItems.length === 0">Fawry Checkout
     </button>
-    <button class="btn btn-success" (click)="paymobCheckout()" [disabled]="cartItems.length === 0">Paymob Redirect Checkout
+    <button class="btn btn-success" (click)="fawryIframeCheckout()" [disabled]="cartItems.length === 0">Fawry Iframe Checkout
     </button>
-    <button class="btn btn-success" (click)="paymobIframeCheckout()" [disabled]="cartItems.length === 0">Paymob Iframe Redirect Checkout
+    <button class="btn btn-success" (click)="paymobCheckout()" [disabled]="cartItems.length === 0">Paymob Redirect
+      Checkout
+    </button>
+    <button class="btn btn-success" (click)="paymobIframeCheckout()" [disabled]="cartItems.length === 0">Paymob Redirect
+      2 Checkout
+    </button>
+    <button class="btn btn-success" (click)="stripeCheckout()" [disabled]="cartItems.length === 0">Stripe Checkout
     </button>
   </div>
 </div>

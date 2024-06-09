@@ -14,6 +14,7 @@ import {ConfirmationComponent} from "./auth/components/confirmation/confirmation
 import {BankCreditComponent} from "./auth/components/bank-credit/bank-credit.component";
 import {HyperSwitchPaymentComponent} from "./auth/components/hyper-switch-payment/hyper-switch-payment.component";
 import {FawryPaymentComponent} from "./auth/components/fawry-payment/fawry-payment.component";
+import {StripeComponent} from "./auth/components/stripe/stripe.component";
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'homepage', component: HomepageComponent, canActivate: [AuthGuard]},
   {path: 'hyperswitch-payment', component: HyperSwitchPaymentComponent},
   {path: 'fawry-payment', component: FawryPaymentComponent},
+  {path: 'stripe-payment', component: StripeComponent},
   {path: '', component: WelcomePageComponent},
   {path: 'product', component: ProductListComponent, canActivate: [AuthGuard]},
   {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},

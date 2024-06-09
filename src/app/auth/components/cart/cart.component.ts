@@ -5,6 +5,7 @@ import {CartService} from "./cartService";
 import {PaymentService} from "../bank-credit/PaymentService";
 import {PaymobService} from "../../../services/services/paymob.service";
 import {PaymobIframeService} from "../../../services/services/paymob-iframe.service";
+import {FawryService} from "../../../services/services/fawry.service";
 
 @Component({
   selector: 'app-cart',
@@ -18,6 +19,7 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService,
               private paymobService: PaymobService,
               private paymobIframeService: PaymobIframeService,
+              private fawryService: FawryService,
               private router: Router) {
   }
 
@@ -44,6 +46,10 @@ export class CartComponent implements OnInit {
   }
 
   fawryCheckout() {
+    this.fawryService.initiatePayment1();
+  }
+
+  fawryIframeCheckout() {
     this.router.navigate(['/fawry-payment']);
   }
 
@@ -61,4 +67,9 @@ export class CartComponent implements OnInit {
   paymobIframeCheckout() {
     this.paymobIframeService.firstStep();
   }
+
+  stripeCheckout() {
+    this.router.navigate(['/stripe-payment']);
+  }
+
 }
