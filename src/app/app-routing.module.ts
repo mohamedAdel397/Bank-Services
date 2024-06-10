@@ -15,6 +15,7 @@ import {BankCreditComponent} from "./auth/components/bank-credit/bank-credit.com
 import {HyperSwitchPaymentComponent} from "./auth/components/hyper-switch-payment/hyper-switch-payment.component";
 import {FawryPaymentComponent} from "./auth/components/fawry-payment/fawry-payment.component";
 import {StripeComponent} from "./auth/components/stripe/stripe.component";
+import {PaymobIframeComponent} from "./auth/components/paymob-iframe/paymob-iframe.component";
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'hyperswitch-payment', component: HyperSwitchPaymentComponent},
   {path: 'fawry-payment', component: FawryPaymentComponent},
   {path: 'stripe-payment', component: StripeComponent},
+  {path: 'paymob-iframe-payment', component: PaymobIframeComponent},
   {path: '', component: WelcomePageComponent},
   {path: 'product', component: ProductListComponent, canActivate: [AuthGuard]},
   {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},

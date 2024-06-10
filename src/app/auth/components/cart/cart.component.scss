@@ -35,3 +35,52 @@
   //flex-direction: column;
   gap: 10px; /* Adjust the space between buttons */
 }
+
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  select {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #ffffff;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #80bdff;
+      outline: none;
+    }
+  }
+}
+
+.button-group {
+  text-align: right;
+
+  .btn {
+    background-color: #28a745;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+
+    &:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: #218838;
+    }
+  }
+}

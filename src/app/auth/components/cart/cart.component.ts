@@ -2,9 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {IProduct} from "../product-list/IProduct";
 import {CartService} from "./cartService";
-import {PaymentService} from "../bank-credit/PaymentService";
 import {PaymobService} from "../../../services/services/paymob.service";
-import {PaymobIframeService} from "../../../services/services/paymob-iframe.service";
 import {FawryService} from "../../../services/services/fawry.service";
 
 @Component({
@@ -15,10 +13,11 @@ import {FawryService} from "../../../services/services/fawry.service";
 export class CartComponent implements OnInit {
   cartItems: { product: IProduct, count: number }[] = [];
   totalAmount: number = 0;
+  paymentMethod: string = '';
+  paymentType: string = '';
 
   constructor(private cartService: CartService,
               private paymobService: PaymobService,
-              private paymobIframeService: PaymobIframeService,
               private fawryService: FawryService,
               private router: Router) {
   }
@@ -38,7 +37,19 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    this.router.navigate(['/bank-credit']);
+    if (this.paymentMethod === 'fawry' && this.paymentType === 'redirect') {
+      this.fawryCheckout();
+    } else if (this.paymentMethod === 'fawry' && this.paymentType === 'iframe') {
+      this.fawryIframeCheckout();
+    } else if (this.paymentMethod === 'paymob' && this.paymentType === 'redirect') {
+      this.paymobCheckout();
+    } else if (this.paymentMethod === 'paymob' && this.paymentType === 'iframe') {
+      this.paymobIframeCheckout();
+    } else if (this.paymentMethod === 'stripe') {
+      this.stripeCheckout();
+    } else if (this.paymentMethod === 'hyperswitch') {
+      this.hyperSwitchCheckout();
+    }
   }
 
   hyperSwitchCheckout() {
@@ -57,15 +68,14 @@ export class CartComponent implements OnInit {
     this.paymobService.createPayment().subscribe({
       next: response => {
         const clientSecret = response.client_secret;
-        const url = this.paymobService.getUnifiedCheckoutUrl(clientSecret);
-        window.location.href = url;
+        window.location.href = this.paymobService.getUnifiedCheckoutUrl(clientSecret);
       },
       error: err => console.error(err)
     });
   }
 
   paymobIframeCheckout() {
-    this.paymobIframeService.firstStep();
+    this.router.navigate(['/paymob-iframe-payment']);
   }
 
   stripeCheckout() {

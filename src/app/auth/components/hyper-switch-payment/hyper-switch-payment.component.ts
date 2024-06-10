@@ -26,8 +26,10 @@ export class HyperSwitchPaymentComponent implements OnInit {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({items: [{id: 'xl-tshirt'}], country: 'US'}),
     });
-    const {clientSecret} = await response.json();
-    this.clientSecret = clientSecret;
+    debugger
+    const result = await response.json();
+    this.clientSecret = result.client_secret;
+    const clientSecret = result.client_secret;
 
     // Initialize HyperSwitch
     this.hyper = (window as any).Hyper(this.YOUR_PUBLISHABLE_KEY);

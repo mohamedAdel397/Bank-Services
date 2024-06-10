@@ -1,16 +1,27 @@
-import { Injectable } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
-@Injectable({
-  providedIn: 'root'
+@Component({
+  selector: 'app-paymob-iframe',
+  templateUrl: './paymob-iframe.component.html',
+  styleUrls: ['./paymob-iframe.component.scss']
 })
-export class PaymobIframeService {
+export class PaymobIframeComponent implements OnInit {
 
-  private readonly API = 'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RjNU9ESTNMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkueW8wNnljbm1lYkt2VmMzT0xmeU1hR3FOV05tdUFBbUpZWUoxaGEyUE8tZ0R6NEQyaHFlZ1dSaUxUSjBsVW1ybGxXaFY4VVJmdkdNV2x0YWZlUVJJZVE=';  // Your API key here
+  private readonly API = 'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RjNU9ESTJMQ0p1WVcxbElqb2lNVGN4T0RBeE1EVTFNaTR5TmpFMk5qRWlmUS5Xc250VGlfVkdIb1FIVmlIeGktdDlQb204a2xHcWVNa3Z3RmYzaTJORUkwZDVOQXBJQldBckpVN081NjNaQm5Rd2tmMS1tVDJwYTViM3FWUTdPdmZuUQ==';  // Your API key here
 
-  private readonly integrationID = 4590381;
+  private readonly integrationID = 4590380;
 
-  constructor(private http: HttpClient) {}
+  paymentUrl: SafeResourceUrl | null = null;
+
+
+  ngOnInit(): void {
+    this.firstStep();
+  }
+
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
+  }
 
   async firstStep() {
     const data = {
@@ -18,7 +29,7 @@ export class PaymobIframeService {
     };
 
     const response: any = await this.http.post('https://accept.paymob.com/api/auth/tokens', data, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
     }).toPromise();
 
     const token = response.token;
@@ -36,7 +47,7 @@ export class PaymobIframeService {
     };
 
     const response: any = await this.http.post('https://accept.paymob.com/api/ecommerce/orders', data, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
     }).toPromise();
 
     const id = response.id;
@@ -70,15 +81,11 @@ export class PaymobIframeService {
     };
 
     const response: any = await this.http.post('https://accept.paymob.com/api/acceptance/payment_keys', data, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
     }).toPromise();
 
     const TheToken = response.token;
-    this.cardPayment(TheToken);
+    this.paymentUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://accept.paymob.com/api/acceptance/iframes/850272?payment_token=${TheToken}`);
   }
 
-  cardPayment(token: string) {
-    const iframeURL = `https://accept.paymob.com/api/acceptance/iframes/850271?payment_token=${token}`;
-    window.location.href = iframeURL;
-  }
 }

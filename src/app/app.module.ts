@@ -25,6 +25,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { FawryPaymentComponent } from './auth/components/fawry-payment/fawry-payment.component';
 import { StripeComponent } from './auth/components/stripe/stripe.component';
+import { PaymobIframeComponent } from './auth/components/paymob-iframe/paymob-iframe.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { StripeComponent } from './auth/components/stripe/stripe.component';
     ConfirmationComponent,
     BankCreditComponent,
     FawryPaymentComponent,
-    StripeComponent
+    StripeComponent,
+    PaymobIframeComponent
   ],
   imports: [
     BrowserModule,
