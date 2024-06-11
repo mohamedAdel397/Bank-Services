@@ -14,6 +14,7 @@ import {ConfirmationComponent} from "./auth/components/confirmation/confirmation
 import {BankCreditComponent} from "./auth/components/bank-credit/bank-credit.component";
 import {HyperSwitchPaymentComponent} from "./auth/components/hyper-switch-payment/hyper-switch-payment.component";
 import {StripePaymentComponent} from "./auth/components/stripe-payment/stripe-payment.component";
+import {FawryPaymentComponent} from "./auth/components/fawry-payment/fawry-payment.component";
 
 
 const routes: Routes = [
@@ -27,7 +28,9 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
   { path: 'bank-credit', component: BankCreditComponent,canActivate: [AuthGuard] },
   { path: 'confirmation', component: ConfirmationComponent,canActivate: [AuthGuard] },
-  { path: 'stripe', component: StripePaymentComponent, canActivate: [AuthGuard]}
+  { path: 'stripe', component: StripePaymentComponent, canActivate: [AuthGuard]},
+  {path: 'fawry-button-integration', component: FawryPaymentComponent},
+
 ];
 
 @NgModule({

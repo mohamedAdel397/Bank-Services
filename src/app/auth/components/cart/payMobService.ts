@@ -32,7 +32,7 @@ export class PayMobService {
       "items": [
         {
           "name": "Item name 1",
-          "amount": 1000,
+          "amount": 10,
           "description": "Watch",
           "quantity": 1
         }

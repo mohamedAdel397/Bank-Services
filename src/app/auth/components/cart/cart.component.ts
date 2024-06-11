@@ -4,6 +4,7 @@ import { IProduct } from "../product-list/IProduct";
 import { CartService } from "./cartService";
 import {PayMobService} from "./payMobService";
 import {PaymobIframeService} from "./paymobIFrame";
+import {FawryLinkIntegrationService} from "./fawryLinkIntegrationService";
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
   totalAmount: number = 0;
 
   constructor(private cartService: CartService, private router: Router, private payMobService : PayMobService,
-              private PaymobIFrame : PaymobIframeService ) {}
+              private PaymobIFrame : PaymobIframeService , private FawryLinkIntegrationService : FawryLinkIntegrationService) {}
 
   ngOnInit(): void {
     this.loadCart();
@@ -48,5 +49,13 @@ export class CartComponent implements OnInit {
   }
   paymobIframeCheckout() {
     this.PaymobIFrame.firstStep();
+  }
+
+  FawryButtonIntegration() {
+    this.router.navigate(['/fawry-button-integration'])
+  }
+
+  FawrylinkIntegration() {
+    this.FawryLinkIntegrationService.initiatePayment1();
   }
 }
