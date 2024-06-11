@@ -27,3 +27,91 @@
 .col-quantity{
   text-align: center;
 }
+/* Basic dropdown styling */
+.dropbtn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.dropdown-content .btn {
+  background-color: #3498db;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+
+.dropdown-content .btn:hover {
+  background-color: #2980b9;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.dropdown-submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
+.dropdown-submenu .btn {
+  background-color: #3498db;
+  padding: 10px;
+  width: 100%;
+}
+
+.dropdown-submenu .btn:hover {
+  background-color: #2980b9;
+}
+
+.dropdown-item:hover .dropdown-submenu {
+  display: block;
+}
+
+.dropdown-item {
+  position: relative;
+}
+
+.btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.small-dropdown {
+  width: 13rem; /* Adjust width to your preference */
+  padding: 0.25rem 0.5rem; /* Smaller padding */
+  font-size: 0.875rem; /* Smaller font size */
+  border-radius: 0.2rem; /* Optional: rounder corners */
+}
+
+.small-dropdown option {
+  padding: 0.25rem 0.5rem; /* Ensure options have smaller padding too */
+}

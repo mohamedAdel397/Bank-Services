@@ -14,6 +14,9 @@ import {FawryLinkIntegrationService} from "./fawryLinkIntegrationService";
 export class CartComponent implements OnInit {
   cartItems: { product: IProduct, count: number }[] = [];
   totalAmount: number = 0;
+  paymentMethod: string = '';
+  paymobCheckoutMethod: string = '';
+  showPaymobOptions: boolean = false;
 
   constructor(private cartService: CartService, private router: Router, private payMobService : PayMobService,
               private PaymobIFrame : PaymobIframeService , private FawryLinkIntegrationService : FawryLinkIntegrationService) {}
@@ -33,7 +36,42 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    this.router.navigate(['/hyperswitch-payment']);
+
+    if (this.paymentMethod === 'HYperSwitch') {
+      this.router.navigate(['/hyperswitch-payment']);
+    }
+
+    else if (this.paymentMethod === 'paymob') {
+      if (this.paymobCheckoutMethod === 'Iframe') {
+        this.PaymobIFrame.firstStep();
+      }
+
+      else if (this.paymobCheckoutMethod === 'Redirect') {
+        this.payMobService.createPayment().subscribe(
+          {
+            next: response => {
+              const clientSecret = response.client_secret;
+              const url = this.payMobService.getUnifiedCheckoutUrl(clientSecret);
+              window.location.href = url;
+            },
+            error: err => console.error(err)
+          });
+      }
+
+    }
+    else if (this.paymentMethod === 'fawry') {
+      if (this.paymobCheckoutMethod === 'Iframe') {
+        this.router.navigate(['/fawry-button-integration'])
+      }
+
+      else if (this.paymobCheckoutMethod === 'Redirect') {
+        this.FawryLinkIntegrationService.initiatePayment1();
+      }
+
+    }
+    else if (this.paymentMethod === 'Stripe') {
+      this.router.navigate(['/stripe']);
+    }
   }
   paymobCheckout() {
     this.payMobService.createPayment().subscribe(
@@ -57,5 +95,9 @@ export class CartComponent implements OnInit {
 
   FawrylinkIntegration() {
     this.FawryLinkIntegrationService.initiatePayment1();
+  }
+
+  onPaymentMethodChange() {
+    this.showPaymobOptions = this.paymentMethod === 'paymob' || this.paymentMethod === 'fawry';
   }
 }

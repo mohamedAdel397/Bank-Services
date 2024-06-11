@@ -22,13 +22,34 @@
     </tr>
     </tbody>
   </table>
-  <div >
-  <h3>Total Amount: {{ totalAmount | currency: 'EUR' : 'symbol' }}</h3>
-  <button class="btn btn-success" (click)="checkout()" [disabled]="cartItems.length === 0">Checkout</button>
-  <button class="btn btn-success" (click)="paymobCheckout()" [disabled]="cartItems.length === 0">Paymob Checkout </button>
-    <button class="btn btn-success" (click)="paymobIframeCheckout()" [disabled]="cartItems.length === 0">Paymob Checkout</button>
-    <button class="btn btn-success" (click)="FawryButtonIntegration()" [disabled]="cartItems.length === 0">Fawry Checkout</button>
-    <button class="btn btn-success" (click)="FawrylinkIntegration()" [disabled]="cartItems.length === 0">Fawry Checkout</button>
+<!--  <div >-->
+<!--  <h3>Total Amount: {{ totalAmount | currency: 'EUR' : 'symbol' }}</h3>-->
+<!--  <button class="btn btn-success" (click)="checkout()" [disabled]="cartItems.length === 0">Checkout</button>-->
+<!--  <button class="btn btn-success" (click)="paymobCheckout()" [disabled]="cartItems.length === 0">Paymob Checkout </button>-->
+<!--    <button class="btn btn-success" (click)="paymobIframeCheckout()" [disabled]="cartItems.length === 0">Paymob Checkout</button>-->
+<!--    <button class="btn btn-success" (click)="FawryButtonIntegration()" [disabled]="cartItems.length === 0">Fawry Checkout</button>-->
+<!--    <button class="btn btn-success" (click)="FawrylinkIntegration()" [disabled]="cartItems.length === 0">Fawry Checkout</button>-->
+<!--  </div>-->
 
+  <div class="mb-3">
+    <label class="form-label">Payment Method:</label>
+    <select class="form-select small-dropdown" [(ngModel)]="paymentMethod" (change)="onPaymentMethodChange()">
+      <option value="" disabled selected>Select Payment Method</option>
+      <option value="HYperSwitch">HYperSwitch</option>
+      <option value="paymob">paymob</option>
+      <option value="fawry">fawry</option>
+      <option value="Stripe">Stripe</option>
+    </select>
   </div>
+
+  <div class="mb-3" *ngIf="showPaymobOptions">
+    <label class="form-label">Paymob Checkout Method:</label>
+    <select class="form-select small-dropdown" [(ngModel)]="paymobCheckoutMethod">
+      <option value="" disabled selected>Select Paymob form</option>
+      <option value="Iframe">Iframe</option>
+      <option value="Redirect">Redirect</option>
+    </select>
+  </div>
+
+  <button class="btn btn-success" (click)="checkout()">Check Out</button>
 </div>
